@@ -7,53 +7,33 @@ import "react-toastify/dist/ReactToastify.css";
 import image from './th.jpeg';
 
 export default function Home() {
+
+
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies([]);
   const [students, setStudents] = useState({});
   const teacherName = "John Doe";
-  const [data, setData] = useState({
-    classId: [],
-    students: [{
-      id: '',
-      name: ''
-    }]
-  })
 
   useEffect(() => {
 
     const teacherId = localStorage.getItem("userId")
-    // console.log("hiiii")
-    const list = axios.get('http://localhost:4000/teacher/getStudents', {
+    console.log("hiiii")
+    axios.get('http://localhost:4000/teacher/getStudents', {
       headers: {
         id: teacherId,
+        // id:"t2",
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       }
     }, { withCredentials: true })
-
-    // if (list.data.status === "success") {
-    //   const studentsList = list.data.data;
-
-    // }
-    // else {
-    //   console.log("Error")
-    // }
+    .then(res=>{
+      console.log(res)
+      setStudents(res.data.students)
+    })
 
     localStorage.removeItem("studentId")
-    localStorage.removeItem("studentDetails")
 
-    const groupedStudents = {
-      101: [
-        { id: 1, name: "Student A" },
-        { id: 2, name: "Student B" }
-      ],
-      102: [
-        { id: 3, name: "Student C" },
-        { id: 4, name: "Student D" }
-      ]
-    };
-
-    setStudents(groupedStudents);
+    // setStudents(groupedStudents);
     console.log(students)
   }, []);
 
@@ -96,22 +76,15 @@ export default function Home() {
           {Object.keys(students).length > 0 ? (
             Object.keys(students).map((classId) => (
               <div key={classId} style={styles.classContainer}>
-                <h3>Class {classId}</h3>
+                <h3>{students[classId][0].classId.toUpperCase()}</h3>
                 {students[classId].map((student) => (
                   <div key={student.id} style={styles.student}>
-                    <p>{student.name}</p>
+                    <p>{student.regNo} __ {student.name}</p>
                     <div>
                       <button
                         style={styles.studentButton}
                         onClick={() => {
                           localStorage.setItem("studentId", student.id)
-                          // const index = list.data.data.findIndex(classId)
-                          // const list = list1.data.data[index]
-                          // list.map((val, i) => {
-                          //   if (val.regNo === student.id) { 
-                          //     localStorage.setItem("studentDetails",list[i])
-                          //   }
-                          // })
                           navigate(`eval/`)
                         }}
                       >
@@ -121,13 +94,6 @@ export default function Home() {
                         style={styles.studentButton}
                         onClick={() => {
                           localStorage.setItem("studentId", student.id)
-                          // const index = list.data.data.findIndex(classId)
-                          // const list = list1.data.data[index]
-                          // list.map((val, i) => {
-                          //   if (val.regNo === student.id) { 
-                          //     localStorage.setItem("studentDetails",list[i])
-                          //   }
-                          // })
                           navigate(`hist/`)
                         }}
                       >
