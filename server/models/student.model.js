@@ -8,7 +8,17 @@ const StudentReport = new mongoose.Schema({
     },
     name:{
         type:String,
-        required : true
+        required:true
+    },
+    currYear:{//current year added
+        type:String,
+        required:true ,
+        enum:["1","2","3"]
+    },
+    currTerm:{//Not required can be exculed
+        type:String,
+        requirde:true,
+        enum:["Entry","I","II","III"]
     },
     classId: {
         type: String,

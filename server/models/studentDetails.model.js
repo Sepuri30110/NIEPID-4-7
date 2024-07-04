@@ -21,7 +21,7 @@ const historySchema = new mongoose.Schema({
     potentiallyHarmfulMedication: { type: String },
     antenatalCheckUps: { type: String },
     significantAccidentsInjury: { type: String },
-    infections: { type: String },
+    infections1: { type: String },
     pregnancy: { type: String },
     attemptedAbortion: { type: String },
     nutrition: { type: String },
@@ -33,7 +33,7 @@ const historySchema = new mongoose.Schema({
     ageAtConception: { type: String },
     hypertension: { type: String },
     diabetes: { type: String },
-    jaundice: { type: String },
+    jaundice1: { type: String },
     fetalMovement: { type: String },
     bleedingDuringLatePregnancy: { type: String },
     labourDuration: { type: String },
@@ -41,7 +41,7 @@ const historySchema = new mongoose.Schema({
     cordAroundNeck: { type: String },
     multiplePregnancies: { type: String },
     feedingProblem: { type: String },
-    convulsion: { type: String },
+    convulsion1: { type: String },
     colorOfTheBaby: { type: String },
     significantInjury: { type: String },
     deliveryPlace: { type: String },
@@ -49,12 +49,17 @@ const historySchema = new mongoose.Schema({
     deliveryType: { type: String },
     abnormalPresentation: { type: String },
     respiratoryDistress: { type: String },
+    jaundice2:{type:String},
     deliveryConductedBy: { type: String },
     labourInduction: { type: String },
     birthCry: { type: String },
+    infection2:{type:String},
     separationFromMotherImmediatelyAfterDelivery: { type: String },
+    jaundice3:{type:String},
     thyroidDysfunctions: { type: String },
     nutritionalDisorders: { type: String },
+    convulsion2:{type:String},
+    infections3:{type:String},
     significantHeadInjury: { type: String }
 });
 
@@ -139,7 +144,10 @@ const stdSchema = new mongoose.Schema({
         required: true
     },
     dob: { type: Date },
-    name: { type: String },
+    name: { 
+        type: String,
+        required:true
+     },
     sex: {
         type: String,
         required: true
